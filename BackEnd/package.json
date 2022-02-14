@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "mocha ./tests/**/*$NAME*.test.js --exit",
-    "tests": "jest"
+    "test": "mocha ./tests/**/*$NAME*.test.js --exit"
   },
   "author": "GenesisHenriques",
   "license": "ISC",
@@ -17,7 +16,6 @@
     "express-rescue": "^1.1.31",
     "mongodb": "^4.3.1",
     "mongoose": "^6.2.1",
-    "nodemon": "^2.0.15",
     "restify": "^8.6.1"
   },
   "devDependencies": {
@@ -31,6 +29,7 @@
     "jest": "^27.5.1",
     "mocha": "^9.2.0",
     "mongodb-memory-server": "^6.9.6",
+    "nodemon": "^2.0.15",
     "sinon": "^13.0.1"
   }
 }
