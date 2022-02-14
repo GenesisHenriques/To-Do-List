@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./tests/**/*$NAME*.test.js --exit",
+    "tests": "jest"
   },
   "author": "GenesisHenriques",
   "license": "ISC",
@@ -20,11 +21,16 @@
     "restify": "^8.6.1"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
     "eslint": "^8.9.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0"
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^27.5.1",
+    "mocha": "^9.2.0",
+    "mongodb-memory-server": "^6.9.6",
+    "sinon": "^13.0.1"
   }
 }
