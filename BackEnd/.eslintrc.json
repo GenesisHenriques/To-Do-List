@@ -1,8 +1,7 @@
 {
     "env": {
         "es2021": true,
-        "node": true,
-        "mocha": true
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -19,8 +18,5 @@
         "react"
     ],
     "rules": {
-        "no-unused-vars": 0,
-        "no-console": 0,
-        "import/no-extraneous-dependencies": 0
     }
 }

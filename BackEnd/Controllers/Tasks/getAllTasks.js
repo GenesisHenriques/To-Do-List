@@ -1,10 +1,6 @@
-const taskService = require('../../Services/Tasks/index');
-
 module.exports = async (req, res, next) => {
   try {
-    const resService = await taskService.getAllTasks();
-
-    return res.status(200).send(resService);
+    return res.status(200).send({ message: 'foii' });
   } catch (error) {
     console.error(error);
     next(error);
