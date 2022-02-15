@@ -1,46 +1,71 @@
-const sinon = require('sinon');
 const { expect } = require('chai');
+const sinon = require('sinon');
 
+const getAllTasks = require('../../Models/tasks/getAllTasks');
 const { MongoClient } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
-// const { getConnection } = require('./mongoMockConnection');
-
-const tasksModel = require('../../Models/tasks/index');
+const mongoConnection = require('../../Models/getConnection');
 
 describe('Busca todos os filmes no BD', () => {
-  console.log('fooi');
-  // Fazendo o mock de um BD
-  const DBServer = new MongoMemoryServer(); // Inicia um BD na memoria do PC
+  const DBserver = new MongoMemoryServer();
+  let connectionMock;
 
-  before(async () => {
-    const urlMock = await DBServer.getUri();
-    const connectionMock = MongoClient.connect(
-      urlMock,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
+  beforeAll(async () => {
+    const URLMock = await DBserver.getUri();
 
-    sinon.stub(MongoClient, 'connect')
-    .resolves(connectionMock); // A função connect vai resolver para o meu connectionMock
-    // Quando chegar na connect, o programa vai executar a minha connectionMock
+    connectionMock = await MongoClient.connect(URLMock, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then((conn) => conn.db('to-do-list'));
+
+    sinon.stub(mongoConnection, 'getConnection').resolves(connectionMock);
   });
 
-  after(async () => {
-    MongoClient.connect.restore();
-    await DBServer.stop();
+  afterAll(async () => {
+    await mongoConnection.getConnection.restore();
   });
 
-  describe('Quando não tem nunhuma task cadastrada', () => {
+  describe('Quando não existir nunhuma task cadastrada', () => {
+    beforeAll(async () => {
+      connectionMock.collection('tasks').deleteMany({});
+    });
+
     it('retorna um array', async () => {
-      const tasks = await tasksModel.getAllTasks(); // executa a model
-      expect(tasks).to.be.an('array') // espero que tasks seja um array
+      const tasks = await getAllTasks(); // executa a model
+      expect(tasks).to.be.a('array'); // espero que tasks seja um array
     });
     it('o array retornado é vazio', async () => {
-      const tasks = await tasksModel.getAllTasks();
+      const tasks = await getAllTasks();
       expect(tasks).to.be.empty; // espero que tasks seja vazio
+    });
+  });
+
+  describe('Quando existir filmes cadastrados', () => {
+    beforeAll(async () => {
+      connectionMock.collection('tasks').insertOne({
+        title: "Projeto x",
+        description: "Fazer o fronteEnd",
+        status: "pendente"
+      });
+    });
+    it('retorna um array', async () => {
+      const tasks = await getAllTasks();
+      expect(tasks).to.be.a('array');
+    });
+
+    it('não é um array vazio', async () => {
+      const tasks = await getAllTasks();
+      expect(tasks).to.be.not.empty;
+    });
+
+    it('deve ter a task cadastrada', async () => {
+      const tasks = await getAllTasks.getAll();
+
+      const [task] = tasks;
+
+      expect(task.title).to.be.eq('Projeto x');
     });
   });
 });
