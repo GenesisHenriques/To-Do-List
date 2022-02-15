@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "mocha ./tests/**/*$NAME*.test.js --exit",
-    "tests": "jest"
+    "test": "jest"
   },
   "author": "GenesisHenriques",
   "license": "ISC",
@@ -19,7 +18,8 @@
     "mongodb": "^4.3.1",
     "mongoose": "^6.2.1",
     "nodemon": "^2.0.15",
-    "restify": "^8.6.1"
+    "restify": "^8.6.1",
+    "supertest": "^6.2.2"
   },
   "devDependencies": {
     "chai": "^4.3.6",
