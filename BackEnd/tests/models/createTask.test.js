@@ -38,7 +38,7 @@ describe('Insere uma nova tarefa no BD', () => {
     it('tal objeto possui o "id" da nova tarefa inserida', async () => {
       const response = await createTask(payloadMovie);
 
-      expect(response).to.have.a.property('_id')
+      expect(response).to.have.a.property('id')
     });
   });
 });
