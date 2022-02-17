@@ -1,0 +1,9 @@
+.home {
+  background-color: #E5E0E2;
+}
+
+.Aside_main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
