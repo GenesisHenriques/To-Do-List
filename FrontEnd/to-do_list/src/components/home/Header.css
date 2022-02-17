@@ -1,0 +1,12 @@
+.header {
+  background-color: black;
+  text-align: center;
+  padding: 0%;
+  margin: 0%;
+  
+}
+
+.header img {
+  width: 12em;
+  padding: 2em;
+}

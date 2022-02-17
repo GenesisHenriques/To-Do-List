@@ -1,0 +1,13 @@
+.aside {
+  background-color: rgb(255, 255, 255);
+  width: 20%;
+}
+
+@font-face {
+  font-family: 'BRUSHSCI';
+  src: url('../../fontes/BRUSHSCI.TTF');
+}
+
+.aside h3 {
+  font-family: 'BRUSHSCI';
+}
